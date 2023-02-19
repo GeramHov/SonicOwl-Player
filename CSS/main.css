@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://css.gg/search.css");
+@import url("https://css.gg/profile.css");
+@import url("https://css.gg/google.css");
+@import url("https://css.gg/facebook.css");
+@import url("https://css.gg/microsoft.css");
+
+/* SETTING TO BODY DARK THEME FEATURES */
+
+body {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 22%,
+    rgba(4, 10, 24, 1) 45%,
+    rgba(14, 14, 41, 1) 61%,
+    rgba(23, 18, 56, 1) 71%,
+    rgba(28, 20, 65, 1) 83%,
+    rgba(31, 21, 71, 1) 89%,
+    rgba(47, 28, 98, 1) 100%
+  );
+  font-family: "Roboto", sans-serif;
+  color: #fbfbfb;
+}
+
+h5 {
+  color: #fbfbfb;
+}
+
+i {
+  color: #fbfbfb;
+}
+
+nav.navbar {
+  background: transparent;
+  height: 9vh;
+}
+
+a {
+  text-decoration: none;
+  color: #fbfbfb;
+}
+
+/* #usericon {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+} */
+
+#searchinput {
+  position: absolute;
+  margin-left: 25vw;
+  display: none;
+}
+
+/* SETTING TO BODY LIGHT THEME ALTERNATION FEATURES */
+
+body.alternate {
+  background: rgb(239, 241, 241);
+  background: radial-gradient(
+    circle,
+    rgba(239, 241, 241, 1) 0%,
+    rgba(255, 223, 210, 1) 100%
+  );
+  font-family: "Roboto", sans-serif;
+  color: #332d2d;
+}
+
+body.alternate::after {
+  content: "";
+  background: rgb(239, 241, 241);
+  background: radial-gradient(
+    circle,
+    rgba(239, 241, 241, 1) 0%,
+    rgba(255, 223, 210, 1) 100%
+  );
+  font-family: "Roboto", sans-serif;
+  color: #332d2d;
+  content: "";
+}
+
+body.alternate h5 {
+  color: #332d2d;
+}
+
+body.alternate h5::after {
+  color: #332d2d;
+}
+
+body.alternate a {
+  color: #332d2d;
+}
+
+body.alternate a::after {
+  color: #332d2d;
+}
+
+body.alternate i {
+  color: #332d2d;
+}
+
+body.alternate i::after {
+  color: #332d2d;
+}
+
+/* SETTING MEDIA QUERY FOR RESPONSIVE */
+
+@media (max-width: 767px) {
+  h5 {
+    font-family: "Roboto", sans-serif;
+    font-size: small;
+  }
+  #searchbox {
+    display: none;
+  }
+  #username {
+    display: none;
+  }
+  #home {
+    display: none;
+  }
+  #homelogo {
+    width: 60px !important;
+  }
+  #logo {
+    width: 40px;
+    height: 40px;
+  }
+  #explore {
+    padding-left: 10px !important;
+  }
+}
