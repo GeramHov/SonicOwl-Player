@@ -4,6 +4,7 @@
 @import url("https://css.gg/google.css");
 @import url("https://css.gg/facebook.css");
 @import url("https://css.gg/microsoft.css");
+@import url('https://css.gg/play-button-o.css');
 
 /* SETTING TO BODY DARK THEME FEATURES */
 
@@ -20,15 +21,21 @@ body {
     rgba(47, 28, 98, 1) 100%
   );
   font-family: "Roboto", sans-serif;
-  color: #fbfbfb;
+  color: #b4bcca;
 }
 
 h5 {
+  color: #b4bcca;
+}
+
+h5:hover{
   color: #fbfbfb;
+  transform: scale(1.03);
+  transition: 0.2s ease;
 }
 
 i {
-  color: #fbfbfb;
+  color: #b4bcca;
 }
 
 nav.navbar {
@@ -41,16 +48,19 @@ a {
   color: #fbfbfb;
 }
 
-/* #usericon {
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-} */
-
 #searchinput {
   position: absolute;
   margin-left: 25vw;
   display: none;
+}
+
+#profilephoto{
+  position: relative;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #fbfbfb;
 }
 
 /* SETTING TO BODY LIGHT THEME ALTERNATION FEATURES */
@@ -75,32 +85,40 @@ body.alternate::after {
     rgba(255, 223, 210, 1) 100%
   );
   font-family: "Roboto", sans-serif;
-  color: #332d2d;
+  color: #71757e;
   content: "";
 }
 
 body.alternate h5 {
-  color: #332d2d;
+  color: #71757e;
 }
 
 body.alternate h5::after {
-  color: #332d2d;
+  color: #71757e;
 }
 
 body.alternate a {
-  color: #332d2d;
+  color: #71757e;
 }
 
 body.alternate a::after {
-  color: #332d2d;
+  color: #71757e;
 }
 
 body.alternate i {
-  color: #332d2d;
+  color: #71757e;
 }
 
 body.alternate i::after {
-  color: #332d2d;
+  color: #71757e;
+}
+
+#theme{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin: 5px;
+
 }
 
 /* SETTING MEDIA QUERY FOR RESPONSIVE */

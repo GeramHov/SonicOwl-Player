@@ -31,13 +31,3 @@ mainSection.addEventListener("click", function () {
   searchButtonIcon.style.display = "block";
   searchBar.style.display = "none";
 });
-
-// BODY DARK/LIGHT THEME ALTERNATE //
-
-const btn = document.getElementById("light");
-const userIcone = document.getElementById("usericon");
-
-btn.addEventListener("click", function () {
-  document.body.classList.toggle("alternate");
-  userIcone.style.border = "1px solid #332d2d";
-});
