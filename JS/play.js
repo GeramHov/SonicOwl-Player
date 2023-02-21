@@ -1,8 +1,9 @@
 // FUNCTION PLAY/STOP //
 
-const pauseBtns = document.querySelectorAll(".pausebutton");
 const playBtns = document.querySelectorAll(".playbutton");
+const pauseBtns = document.querySelectorAll(".pausebutton");
 const audioTags = document.querySelectorAll("audio");
+
 const mainPlay = document.querySelector("#play");
 const mainPause = document.querySelector("#pause");
 const backwardBtn = document.querySelector("#backward");
