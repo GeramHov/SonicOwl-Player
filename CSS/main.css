@@ -147,6 +147,41 @@ body.alternate i::after {
   left: 200px;
 }
 
+.btn-primary-outline {
+  background-color: transparent;
+  border-color: #ccc;
+  border: 1px solid #fbfbfb;
+}
+
+body.alternate .btn-primary-outline{
+  background-color: transparent;
+  border-color: #332d2d;
+  border: 1px solid #332d2d;
+
+}
+
+body.alternate .btn-primary-outline::after{
+  background-color: transparent;
+  border-color: #332d2d;
+  border: 1px solid #332d2d;
+}
+
+.btn-primary-outline:hover {
+  background-color: transparent;
+  border-color: #ccc;
+  border: 1px solid #fbfbfb;
+  transform: scale(1.05);
+  box-shadow: 1px 1px #fbfbfb;
+}
+
+body.alternate span{
+  color: #332d2d;
+}
+
+body.alternate span::after{
+  color: #332d2d;
+}
+
 /* SETTING MEDIA QUERY FOR RESPONSIVE */
 
 @media (max-width: 767px) {
