@@ -4,8 +4,8 @@
 @import url("https://css.gg/google.css");
 @import url("https://css.gg/facebook.css");
 @import url("https://css.gg/microsoft.css");
-@import url('https://css.gg/play-button-o.css');
-@import url('https://css.gg/play-pause-o.css');
+@import url("https://css.gg/play-button-o.css");
+@import url("https://css.gg/play-pause-o.css");
 
 /* SETTING TO BODY DARK THEME FEATURES */
 
@@ -30,11 +30,11 @@ h5 {
   cursor: default;
 }
 
-h4{
+h4 {
   cursor: default;
 }
 
-h5:hover{
+h5:hover {
   color: #fbfbfb;
   transform: scale(1.03);
   transition: 0.2s ease;
@@ -61,7 +61,7 @@ a {
   display: none;
 }
 
-#profilephoto{
+#profilephoto {
   position: relative;
   width: 130px;
   height: 130px;
@@ -70,25 +70,25 @@ a {
   border: 1px solid #fbfbfb;
 }
 
-#playbutton{
+#playbutton {
   cursor: pointer;
   display: block;
 }
 
-#pausebutton{
+#pausebutton {
   position: relative;
   cursor: pointer;
   display: none;
 }
 
-#playlistitems{
+#playlistitems {
   width: 49vw;
-  height: auto
+  height: auto;
 }
 
-#albumtitle{
+#albumtitle {
   position: absolute;
-  right: 200px
+  right: 200px;
 }
 
 /* SETTING TO BODY LIGHT THEME ALTERNATION FEATURES */
@@ -141,17 +141,16 @@ body.alternate i::after {
   color: #71757e;
 }
 
-#theme{
+#theme {
   position: fixed;
   left: 0;
   bottom: 0;
   margin: 5px;
-
 }
 
-#player{
+#player {
   position: absolute;
-  left: 200px
+  left: 200px;
 }
 
 /* SETTING MEDIA QUERY FOR RESPONSIVE */
@@ -170,7 +169,7 @@ body.alternate i::after {
   #home {
     display: none;
   }
-  #homebutton{
+  #homebutton {
     display: none;
   }
   #homelogo {
@@ -183,13 +182,13 @@ body.alternate i::after {
   #explore {
     padding-left: 10px !important;
   }
-  #album{
+  #album {
     display: none;
   }
-  #albumtitle{
+  #albumtitle {
     display: none;
   }
-  #profilephoto{
+  #profilephoto {
     position: relative;
     width: 65px;
     height: 65px;
@@ -197,7 +196,43 @@ body.alternate i::after {
     overflow: hidden;
     border: 1px solid #fbfbfb;
   }
-  #profileuserlastname{
+  #profileuserlastname {
     display: none;
   }
+}
+
+#music-player {
+  bottom: 0;
+  left: 0;
+  height: 7vh;
+  background: #060608;
+  position: fixed;
+}
+
+#play {
+  display: block;
+  cursor: pointer;
+}
+
+#pause {
+  position: relative;
+  margin-right: 24px;
+  display: none;
+  cursor: pointer;
+}
+
+#backward {
+  cursor: pointer;
+}
+
+#forward {
+  cursor: pointer;
+}
+
+#shuffle {
+  cursor: pointer;
+}
+
+#repeat {
+  cursor: pointer;
 }
