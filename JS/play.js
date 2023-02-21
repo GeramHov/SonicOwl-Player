@@ -10,6 +10,7 @@ const forwardBtn = document.querySelector("#forward");
 const shuffleBtn = document.querySelector("#shuffle");
 const repeatBtn = document.querySelector("#repeat");
 const volumeBar = document.querySelector("#volume-bar input");
+const musicPlayer = document.querySelector("#music-player");
 
 // VOLUME CONTROL
 
@@ -31,6 +32,7 @@ volumeBar.addEventListener("input", () => {
 let currentIndex = 0;
 let isShuffle = false;
 let isRepeat = false;
+
 
 function play(audioTag, playBtn, pauseBtn) {
   // Pause any other playing audio tags
@@ -72,6 +74,7 @@ playBtns.forEach((playBtn, index) => {
   playBtn.addEventListener("click", () => {
     play(audioTag, playBtn, pauseBtn);
     currentIndex = index;
+    musicPlayer.style.display = "block";
   });
 });
 
@@ -116,6 +119,7 @@ backwardBtn.addEventListener("click", () => {
   let newIndex;
   if (isShuffle) {
     newIndex = getRandomIndex();
+
   } else {
     newIndex = currentIndex - 1;
     if (newIndex < 0) {
