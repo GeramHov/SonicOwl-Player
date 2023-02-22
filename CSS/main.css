@@ -182,10 +182,95 @@ body.alternate span::after{
   color: #332d2d;
 }
 
+#albumcard{
+  width: 15vw;
+  height: 26vh;
+  border: 1px solid #fbfbfb ;
+  background: transparent;
+}
+
+#albumcard:hover{
+  width: 15vw;
+  height: 26vh;
+  border: 1px solid #fbfbfb ;
+  background: transparent;
+  transform: scale(1.05);
+  transition: 0.2s ease-in;
+}
+
+#albumcard:not(:hover){
+  width: 15vw;
+  height: 26vh;
+  border: 1px solid #fbfbfb ;
+  background: transparent;
+  transform: scale(1.0);
+  transition: 0.2s ease-out;
+}
+
+#tracktitle, #tracksinger, #titleofalbum{
+  width: 15vw;
+  height: auto;
+}
+
+#albumcard img{
+  object-fit: cover;
+  width: 14vw;
+  height: 25vh;
+}
+
+#albumplaybtn{
+  position: absolute;
+  width: 48px !important;
+  height: 48px !important;
+}
+
+#albumpausebtn{
+  position: absolute;
+  width: 48px !important;
+  height: 48px !important;
+  display: none;
+}
+
+#albumpausebtn:hover{
+  position: absolute;
+  width: 48px !important;
+  height: 48px !important;
+  transform: scale(1.3);
+  transition: 0.2s ease-in;
+  cursor: pointer;
+}
+
+#albumpausebtn:not(:hover){
+  position: absolute;
+  width: 48px !important;
+  height: 48px !important;
+  transform: scale(1.0);
+  transition: 0.2s ease-out;
+  cursor: pointer;
+}
+
+#albumplaybtn:hover{
+  position: absolute;
+  width: 48px !important;
+  height: 48px !important;
+  transform: scale(1.3);
+  transition: 0.2s ease-in;
+  cursor: pointer;
+}
+
+#albumplaybtn:not(:hover){
+  position: absolute;
+  width: 48px !important;
+  height: 48px !important;
+  transform: scale(1.0);
+  transition: 0.2s ease-out;
+  cursor: pointer;
+}
+
 /* SETTING MEDIA QUERY FOR RESPONSIVE */
 
 @media (max-width: 767px) {
-  h5 {
+  h5, h3, h4 {
     font-family: "Roboto", sans-serif;
     font-size: small;
   }
@@ -195,12 +280,7 @@ body.alternate span::after{
   #username {
     display: none;
   }
-  #home {
-    display: none;
-  }
-  #homebutton {
-    display: none;
-  }
+
   #homelogo {
     width: 60px !important;
   }
@@ -208,9 +288,14 @@ body.alternate span::after{
     width: 40px;
     height: 40px;
   }
-  #explore {
-    padding-left: 10px !important;
+  #home, #library {
+    padding-inline: 10px !important
   }
+
+  #community{
+    padding-right: 10px !important;
+  } 
+
   #album {
     display: none;
   }
@@ -285,6 +370,38 @@ body.alternate span::after{
     border-radius: 50%;
     width: 12px;
     height: 12px;
+  }
+
+  #albumcard{
+    width: 60px !important;
+    height: 40px !important;
+    border: 1px solid #fbfbfb ;
+    background: transparent;
+  }
+
+  #albumplaybtn{
+    position: absolute;
+    width: 24px !important;
+    height: 24px !important;
+  }
+  
+  #albumpausebtn{
+    position: absolute;
+    width: 24px !important;
+    height: 24px !important;
+    display: none;
+  }
+
+  #tracktitle, #tracksinger, #titleofalbum{
+    width: 35px;
+    height: auto;
+  }
+  #homelogo{
+    display: none;
+  }
+
+  #searchbutton{
+    padding: 0 !important;
   }
 }
 
