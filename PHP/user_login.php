@@ -22,7 +22,7 @@
             header('Location: index.php'); // redirect to index or any page after successful login
             exit();
           } else {
-            $error = "Invalid email or password.";
+            $error = "Invalid email or password";
           }
         }
     

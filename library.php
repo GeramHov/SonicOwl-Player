@@ -1,7 +1,13 @@
 <?php
 session_start();
-include_once("PHP/header.php");
+require_once("PHP/config.php");
 require_once("PHP/user_login.php");
+require_once("PHP/tracks_prepare.php");
+include_once("PHP/header.php");
+
+$tracks = $_SESSION['tracks'];
+
+
 ?>
   <body>
     <nav class="navbar">
@@ -86,8 +92,8 @@ require_once("PHP/user_login.php");
         </div>
       </div>
     </nav>
-    <section id="main" class="my-5">
-      <div class="container my-5">
+    <section id="main" class="my-2">
+      <div class="container my-2">
         <div class="row">
           <div class="col col-lg-8 col-md-6 col-sm-6 d-flex align-items-center">
             <h1>Library</h1>
@@ -102,6 +108,7 @@ require_once("PHP/user_login.php");
       </div>
       <div class="container d-flex">
         <div class="col col-lg-6 col-md-6 col-sm-8">Title</div>
+
         <div
           id="album"
           class="col col-lg-6 col-md-6 col-sm-4 d-flex justify-content-start mx-2"
@@ -111,97 +118,26 @@ require_once("PHP/user_login.php");
       </div>
     </section>
     <div class="container">
-      <div class="row">
+    <?php
+      foreach ($tracks as $track) {
+        $albumCoverName = 'COVER/'. $track['album_cover'];
+        echo '
+              <div class="row">
         <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
           <i id="playbutton" class="gg-play-button-o playbutton"></i>
           <i id="pausebutton" class="gg-play-pause-o pausebutton"></i>
-          <h4 class="mx-3">All Eyez On Me</h4>
+          <h4 class="mx-3">' .substr($track['title'],0, -4) . '</h4>
         </div>
         <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <img src="TEST/alleyezonme.jpeg" alt="album" width="40" height="40" />
-          <h5 class="px-4">All Eyez On Me</h5>
-        </div>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <i id="playbutton" class="gg-play-button-o playbutton"></i>
-          <i id="pausebutton" class="gg-play-pause-o pausebutton"></i>
-          <h4 class="px-4">Hit'em Up</h4>
-        </div>
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <img src="TEST/greatesthits.jpg" alt="album" width="40" height="40" />
-          <h5 class="px-4">Greatest Hits</h5>
-        </div>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <i id="playbutton" class="gg-play-button-o playbutton"></i>
-          <i id="pausebutton" class="gg-play-pause-o pausebutton"></i>
-          <h4 class="px-4">Hennessy</h4>
-        </div>
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <img
-            src="TEST/loyaltothegame.jpg"
-            alt="album"
-            width="40"
-            height="40"
-          />
-          <h5 class="px-4">Loyal To The Game</h5>
-        </div>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <i id="playbutton" class="gg-play-button-o playbutton"></i>
-          <i id="pausebutton" class="gg-play-pause-o pausebutton"></i>
-          <h4 class="px-4">Lord Knows</h4>
-        </div>
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <img
-            src="TEST/megainsttheworld.jpg"
-            alt="album"
-            width="40"
-            height="40"
-          />
-          <h5 class="px-4">Me Against The World</h5>
-        </div>
-      </div>
-      <hr />
-      <div class="row">
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <i id="playbutton" class="gg-play-button-o playbutton"></i>
-          <i id="pausebutton" class="gg-play-pause-o pausebutton"></i>
-          <h4 class="px-4">Papa'z Song</h4>
-        </div>
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <img
-            src="TEST/strictly4myniggaz.jpeg"
-            alt="album"
-            width="40"
-            height="40"
-          />
-          <h5 class="px-4">Strictly 4 My N.I.G.G.A.Z</h5>
+          <img src="'.$albumCoverName.'" alt="album" width="40" height="40" />
+          <h5 class="px-4">'.$track['album'].'</h5>
         </div>
       </div>
       <hr>
-      <div class="row">
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <i id="playbutton" class="gg-play-button-o playbutton"></i>
-          <i id="pausebutton" class="gg-play-pause-o pausebutton"></i>
-          <h4 class="px-4">Without Me</h4>
-        </div>
-        <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
-          <img
-            src="https://media.auchan.fr/MEDIASTEP182809734_2048x2048/B2CD/"
-            alt="album"
-            width="40"
-            height="40"
-          />
-          <h5 class="px-4">The Eminem Show</h5>
-        </div>
-      </div>
+        ';
+      }
+    ?>
+
     </div>
 
 <!-- PLAYER START -->
@@ -264,12 +200,12 @@ require_once("PHP/user_login.php");
 
     <!-- AUDIO TAGS START -->
 
-    <audio id="title1" src="TEST/alleyezonme.mp3"></audio>
-    <audio id="title2" src="TEST/hitemup.mp3"></audio>
-    <audio id="title3" src="TEST/hennessy.mp3"></audio>
-    <audio id="title4" src="TEST/lordknows.mp3"></audio>
-    <audio id="title5" src="TEST/papazsong.mp3"></audio>
-    <audio id="title6" src="TEST/withoutme.mp3"></audio>
+    <?php
+      foreach ($tracks as $track) {
+        $mp3Name = 'TRACKS/'.$track['title'];
+        echo '<audio id="title1" src="'.$mp3Name.'"></audio>';
+      }
+    ?>
 
     <!-- AUDIO TAGS END -->
     
