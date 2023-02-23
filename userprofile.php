@@ -1,9 +1,9 @@
 <?php
 session_start();
-include_once("PHP\header.php");
-require_once("PHP\config.php");
-require_once("PHP\user_login.php");
-require_once("PHP\user_logout.php");
+include_once("PHP/header.php");
+require_once("PHP/config.php");
+require_once("PHP/user_login.php");
+require_once("PHP/user_logout.php");
 ?>
   <body>
     <nav class="navbar">
@@ -11,7 +11,7 @@ require_once("PHP\user_logout.php");
         <div id="homelogo" class="col col-lg-1 col-md-1 ps-2">
           <a href="index.php"><img
             id="logo"
-            src="LOGO\FullLogo_Transparent_NoBuffer.png"
+            src="LOGO/FullLogo_Transparent_NoBuffer.png"
             alt="logo"
             height="55"
             width="55"
@@ -293,7 +293,7 @@ require_once("PHP\user_logout.php");
       crossorigin="anonymous"
     ></script>
     <script src="JS/lightmode.js"></script>
-    <script src="JS\searchbar.js"></script>
+    <script src="JS/searchbar.js"></script>
     <script src="JS/play.js"></script>
   </body>
 </html>

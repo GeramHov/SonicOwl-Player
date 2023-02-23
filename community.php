@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once("PHP\header.php");
-require_once("PHP\user_login.php");
+include_once("PHP/header.php");
+require_once("PHP/user_login.php");
 ?>
   <body>
     <nav class="navbar">
@@ -9,7 +9,7 @@ require_once("PHP\user_login.php");
         <div id="homelogo" class="col col-lg-1 col-md-1 ps-2">
           <a href="index.html"><img
             id="logo"
-            src="LOGO\FullLogo_Transparent_NoBuffer.png"
+            src="LOGO/FullLogo_Transparent_NoBuffer.png"
             alt="logo"
             height="55"
             width="55"

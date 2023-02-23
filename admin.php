@@ -1,8 +1,8 @@
 <?php
     session_start();
-    include_once('PHP\header.php');
-    require_once('PHP\config.php');
-    require_once('PHP\tracks_insert.php');
+    include_once('PHP/header.php');
+    require_once('PHP/config.php');
+    require_once('PHP/tracks_insert.php');
 ?>
 <body>
 <section class="vh-75 gradient-custom">
