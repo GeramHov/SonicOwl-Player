@@ -9,6 +9,18 @@
 
 /* SETTING TO BODY DARK THEME FEATURES */
 
+::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #333; /* Set the background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #666; /* Set the color of the scrollbar thumb */
+}
+
 body {
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -141,7 +153,6 @@ body.alternate i::after {
   color: #71757e;
 }
 
-
 #player {
   position: absolute;
   left: 200px;
@@ -153,14 +164,13 @@ body.alternate i::after {
   border: 1px solid #fbfbfb;
 }
 
-body.alternate .btn-primary-outline{
+body.alternate .btn-primary-outline {
   background-color: transparent;
   border-color: #332d2d;
   border: 1px solid #332d2d;
-
 }
 
-body.alternate .btn-primary-outline::after{
+body.alternate .btn-primary-outline::after {
   background-color: transparent;
   border-color: #332d2d;
   border: 1px solid #332d2d;
@@ -174,64 +184,66 @@ body.alternate .btn-primary-outline::after{
   box-shadow: 1px 1px #fbfbfb;
 }
 
-body.alternate span{
+body.alternate span {
   color: #332d2d;
 }
 
-body.alternate span::after{
+body.alternate span::after {
   color: #332d2d;
 }
 
-#albumcard{
+#albumcard {
   width: 15vw;
   height: 26vh;
-  border: 1px solid #fbfbfb ;
+  border: 1px solid #fbfbfb;
   background: transparent;
 }
 
-#albumcard:hover{
+#albumcard:hover {
   width: 15vw;
   height: 26vh;
-  border: 1px solid #fbfbfb ;
+  border: 1px solid #fbfbfb;
   background: transparent;
   transform: scale(1.05);
   transition: 0.2s ease-in;
 }
 
-#albumcard:not(:hover){
+#albumcard:not(:hover) {
   width: 15vw;
   height: 26vh;
-  border: 1px solid #fbfbfb ;
+  border: 1px solid #fbfbfb;
   background: transparent;
-  transform: scale(1.0);
+  transform: scale(1);
   transition: 0.2s ease-out;
 }
 
-#tracktitle, #tracksinger, #titleofalbum{
+#tracktitle,
+#tracksinger,
+#titleofalbum {
   width: 15vw;
   height: auto;
 }
 
-#albumcard img{
+#albumcard img {
   object-fit: cover;
   width: 14vw;
   height: 25vh;
 }
 
-#albumplaybtn{
+#albumplaybtn {
   position: absolute;
   width: 48px !important;
   height: 48px !important;
 }
 
-#albumpausebtn{
+#albumpausebtn {
   position: absolute;
   width: 48px !important;
   height: 48px !important;
   display: none;
 }
 
-#albumpausebtn:hover{
+#albumpausebtn:hover {
   position: absolute;
   width: 48px !important;
   height: 48px !important;
@@ -240,16 +252,16 @@ body.alternate span::after{
   cursor: pointer;
 }
 
-#albumpausebtn:not(:hover){
+#albumpausebtn:not(:hover) {
   position: absolute;
   width: 48px !important;
   height: 48px !important;
-  transform: scale(1.0);
+  transform: scale(1);
   transition: 0.2s ease-out;
   cursor: pointer;
 }
 
-#albumplaybtn:hover{
+#albumplaybtn:hover {
   position: absolute;
   width: 48px !important;
   height: 48px !important;
@@ -258,19 +270,27 @@ body.alternate span::after{
   cursor: pointer;
 }
 
-#albumplaybtn:not(:hover){
+#albumplaybtn:not(:hover) {
   position: absolute;
   width: 48px !important;
   height: 48px !important;
-  transform: scale(1.0);
+  transform: scale(1);
   transition: 0.2s ease-out;
   cursor: pointer;
+}
+
+#loggedusericon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
 }
 
 /* SETTING MEDIA QUERY FOR RESPONSIVE */
 
 @media (max-width: 767px) {
-  h5, h3, h4 {
+  h5,
+  h3,
+  h4 {
     font-family: "Roboto", sans-serif;
     font-size: small;
   }
@@ -288,13 +308,14 @@ body.alternate span::after{
     width: 40px;
     height: 40px;
   }
-  #home, #library {
-    padding-inline: 10px !important
+  #home,
+  #library {
+    padding-inline: 10px !important;
   }
 
-  #community{
+  #community {
     padding-right: 10px !important;
-  } 
+  }
 
   #album {
     display: none;
@@ -313,7 +334,7 @@ body.alternate span::after{
   #profileuserlastname {
     display: none;
   }
-  #volume-bar{
+  #volume-bar {
     display: none;
   }
   #play {
@@ -322,7 +343,7 @@ body.alternate span::after{
     width: 18px;
     height: 18px;
   }
-  
+
   #pause {
     position: relative;
     margin-right: 24px;
@@ -331,40 +352,40 @@ body.alternate span::after{
     width: 18px;
     height: 18px;
   }
-  
+
   #backward {
     cursor: pointer;
     width: 12px;
     height: 12px;
   }
-  
+
   #forward {
     cursor: pointer;
     width: 12px;
     height: 12px;
   }
-  
+
   #shuffle {
     cursor: pointer;
     width: 12px;
     height: 12px;
   }
-  
-  #shuffle.active{
+
+  #shuffle.active {
     cursor: pointer;
     transform: scale(1.4) rotate(180deg);
     border-radius: 50%;
     width: 12px;
     height: 12px;
   }
-  
+
   #repeat {
     cursor: pointer;
     width: 12px;
     height: 12px;
   }
-  
-  #repeat.active{
+
+  #repeat.active {
     cursor: pointer;
     transform: scale(1.3) rotate(90deg);
     border-radius: 50%;
@@ -372,35 +393,37 @@ body.alternate span::after{
     height: 12px;
   }
 
-  #albumcard{
+  #albumcard {
     width: 60px !important;
     height: 40px !important;
-    border: 1px solid #fbfbfb ;
+    border: 1px solid #fbfbfb;
     background: transparent;
   }
 
-  #albumplaybtn{
+  #albumplaybtn {
     position: absolute;
     width: 24px !important;
     height: 24px !important;
   }
-  
-  #albumpausebtn{
+
+  #albumpausebtn {
     position: absolute;
     width: 24px !important;
     height: 24px !important;
     display: none;
   }
 
-  #tracktitle, #tracksinger, #titleofalbum{
+  #tracktitle,
+  #tracksinger,
+  #titleofalbum {
     width: 35px;
     height: auto;
   }
-  #homelogo{
+  #homelogo {
     display: none;
   }
 
-  #searchbutton{
+  #searchbutton {
     padding: 0 !important;
   }
 }
@@ -409,8 +432,15 @@ body.alternate span::after{
   bottom: 0;
   left: 0;
   height: 6vh;
-  background: rgb(237,53,43);
-  background: linear-gradient(90deg, rgba(237,53,43,1) 0%, rgba(243,92,51,1) 16%, rgba(244,115,52,1) 55%, rgba(245,137,60,1) 65%, rgba(240,115,111,1) 100%);
+  background: rgb(237, 53, 43);
+  background: linear-gradient(
+    90deg,
+    rgba(237, 53, 43, 1) 0%,
+    rgba(243, 92, 51, 1) 16%,
+    rgba(244, 115, 52, 1) 55%,
+    rgba(245, 137, 60, 1) 65%,
+    rgba(240, 115, 111, 1) 100%
+  );
   position: fixed;
   display: none;
 }
@@ -439,7 +469,7 @@ body.alternate span::after{
   cursor: pointer;
 }
 
-#shuffle.active{
+#shuffle.active {
   cursor: pointer;
   transform: scale(1.4) rotate(180deg);
   border-radius: 50%;
@@ -449,7 +479,7 @@ body.alternate span::after{
   cursor: pointer;
 }
 
-#repeat.active{
+#repeat.active {
   cursor: pointer;
   transform: scale(1.3) rotate(90deg);
   border-radius: 50%;
