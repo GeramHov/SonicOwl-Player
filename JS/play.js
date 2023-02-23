@@ -34,7 +34,6 @@ let currentIndex = 0;
 let isShuffle = false;
 let isRepeat = false;
 
-
 function play(audioTag, playBtn, pauseBtn) {
   // Pause any other playing audio tags
   audioTags.forEach((tag) => {
@@ -120,7 +119,6 @@ backwardBtn.addEventListener("click", () => {
   let newIndex;
   if (isShuffle) {
     newIndex = getRandomIndex();
-
   } else {
     newIndex = currentIndex - 1;
     if (newIndex < 0) {
