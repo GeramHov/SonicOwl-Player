@@ -1,9 +1,9 @@
 <?php
 session_start();
-include_once("PHP/header.php");
 require_once("PHP/config.php");
-require_once("PHP/user_login.php");
 require_once("PHP/user_logout.php");
+require_once("PHP/user_login.php");
+include_once("PHP/header.php");
 ?>
   <body>
     <nav class="navbar">

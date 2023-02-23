@@ -19,7 +19,7 @@
       
             // Save user data in the session
             $_SESSION['user'] = $user;
-            header('Location: index.php'); // redirect to dashboard or any page after successful login
+            header('Location: index.php'); // redirect to index or any page after successful login
             exit();
           } else {
             $error = "Invalid email or password.";
