@@ -52,7 +52,7 @@ include_once("PHP/header.php");
             href="#"
             class="px-4 d-flex align-items-center justify-content-center"
           >
-            <i id="searchbuttonicon" class="mb-1 gg-search fw-small"></i>
+            <img id="searchbuttonicon" class="mb-1" src="ICON/search.png" alt="" height="18" width="18">
             <h5 id="searchbox" class="ps-3">Search</h5>
           </a>
         </div>

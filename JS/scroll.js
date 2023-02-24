@@ -63,3 +63,18 @@ document.querySelector("#rapsection").addEventListener("click", function() {
     section.scrollIntoView({ behavior: 'smooth' });
   });
 
+// SCROLL TO TOP
+
+const element = document.getElementById("totop");
+
+element.addEventListener("click", function () {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+window.addEventListener("scroll", function () {
+  if (window.scrollY === 0) {
+    element.classList.remove("active");
+  } else {
+    element.classList.add("active");
+  }
+});

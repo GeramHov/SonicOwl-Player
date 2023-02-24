@@ -54,7 +54,7 @@ include_once("PHP/header.php");
             href="#"
             class="px-4 d-flex align-items-center justify-content-center"
           >
-            <i id="searchbuttonicon" class="mb-1 gg-search fw-small"></i>
+            <img id="searchbuttonicon" class="mb-1" src="ICON/search.png" alt="" height="18" width="18">
             <h5 id="searchbox" class="ps-3">Search</h5>
           </a>
         </div>
@@ -95,8 +95,8 @@ include_once("PHP/header.php");
           <div class="col col-lg-8 col-md-6 col-sm-6 d-flex align-items-center">
             <h1>Library</h1>
           </div>
-          <div class="col col-lg-4 col-md-6 col-sm-6 justify-content-end">
-            <img src="LOGO/Print_Transparent (1).svg" alt="" width="300" height="300">
+          <div class="col col-lg-4 col-md-6 col-sm-6 justify-content-end mt-2">
+            <img src="LOGO/libraryplay.png" alt="" width="270" height="300">
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@ include_once("PHP/header.php");
         <h4 class="my-3 py-3">All</h4>
       </div>
       <div class="container d-flex">
-        <div class="col col-lg-6 col-md-6 col-sm-8">Title</div>
+        <div class="col col-lg-6 col-md-6 col-sm-8 mb-3">Title</div>
 
         <div
           id="album"

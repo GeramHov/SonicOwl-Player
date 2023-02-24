@@ -5,6 +5,29 @@ require_once("PHP/tracks_prepare.php");
 include_once("PHP/header.php");
 
 ?>
+
+<?php
+require_once("PHP/config.php");
+
+$requery = $dataBase->prepare("
+    SELECT * FROM tracks 
+    WHERE title LIKE CONCAT('%', :keyword, '%')
+    OR album LIKE CONCAT('%', :keyword, '%')
+    OR author LIKE CONCAT('%', :keyword, '%')
+    LIMIT 6
+");
+
+if(isset($_GET['keyword'])) {
+  $requery->execute(['keyword' => $_GET['keyword']]);
+  $searchedTracks = $requery->fetchAll(PDO::FETCH_ASSOC);
+}
+
+global $searchedTracks;
+
+?>
+
+
+
   <body>
     <!-- NAVBAR START -->
     <nav class="navbar">
@@ -20,22 +43,27 @@ include_once("PHP/header.php");
           
         </div>
         <div id="searchinput">
+          <form action="index.php" method="get">
           <div class="input-group rounded" style="width: 50vw">
             <input
               type="search"
+              name="keyword"
               class="form-control rounded"
               placeholder="Title, artist or album name ..."
               aria-label="Search"
               aria-describedby="search-addon"
             />
+            <button id="btnsearch">
             <span
               class="input-group-text bg-dark"
               id="search-addon"
               type="submit"
             >
-              <i class="mb-1 gg-search" style="color: #fbfbfb"></i>
+              <i class="mb-1 gg-search" id="iconsearch" style="color: #fbfbfb"></i>
             </span>
+            </button>
           </div>
+        </form>
         </div>
         <div
           class="col col-lg-9 col-md-8 col-sm-10 text-center d-flex justify-content-center"
@@ -54,7 +82,7 @@ include_once("PHP/header.php");
             href="#"
             class="px-4 d-flex align-items-center justify-content-center"
           >
-            <i id="searchbuttonicon" class="mb-1 gg-search fw-small"></i>
+            <img id="searchbuttonicon" class="mb-1" src="ICON/search.png" alt="" height="18" width="18">
             <h5 id="searchbox" class="ps-3">Search</h5>
           </a>
         </div>
@@ -91,8 +119,8 @@ include_once("PHP/header.php");
     </nav>
     <!-- NAVBAR END -->
     <!-- SECTION MAIN START -->
-    <div id="main" class="mb-5">
-      <div class="container d-flex my-5">
+    <div id="main" class="">
+      <div class="container d-flex my-3">
         
         <button id="rapsection" type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Rap 'n R&B</span></button>
         <button id="hiphopsection" type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Hip & Hop</span></button>
@@ -101,9 +129,114 @@ include_once("PHP/header.php");
 
       </div>
 
+
+    <!-- SEARCH SECTION START -->
+
+      <p id="noresult" class="mx-5">No result found.</p>
+
+    <section id="search" class="container-fluid my-4">
+        <h3>Search results...</h3>
+      </div>
+      
+      <div class="container-fluid d-flex m-0 p-0">
+
+      <?php
+      if($searchedTracks){
+        foreach ($searchedTracks as $searchedTrack) {
+          echo '
+          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
+            <p class="p-0 m-0">Album : '.$searchedTrack['album'].'</p>
+          </div>
+          ';
+        }
+      }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-4">
+
+      <?php
+      if($searchedTracks){
+        foreach ($searchedTracks as $searchedTrack) {
+          $searchedAlbumImg = 'COVER/'. $searchedTrack['album_cover'];
+          echo '
+          <form action="index.php" method="get">
+          <input type="text" name="name" value="yes" hidden>
+            <button id="likebutton" type="submit">
+                <img src="ICON/fvbtn.png" alt="" width="24" height="22">
+            </button>
+          </form>
+          <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
+          <img src="'. $searchedAlbumImg .'" alt="">
+          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
+          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
+          </div>
+          ';
+        }
+      }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+      if($searchedTracks){
+        foreach ($searchedTracks as $searchedTrack) {
+          $searchedPureTrackname = substr($searchedTrack['title'], 0, -4);
+          echo '
+          <div id="tracktitle" class="d-flex justify-content-center mx-3">
+          <h4>'. $searchedPureTrackname .'</h4>
+        </div>
+          ';
+        }
+      }
+      ?>
+
+      </div>
+
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+      if($searchedTracks){
+        foreach ($searchedTracks as $searchedTrack) {
+          echo '
+          <div id="tracksinger" class="d-flex justify-content-center mx-3">
+            <h5>' . $searchedTrack['author'] . '</h5>
+          </div>
+          ';
+        }
+      } 
+      ?>
+
+      </div>
+
+    <!-- SEARCH MIX AUDIO START -->
+
+      <?php
+      if($searchedTracks) {
+        foreach ($searchedTracks as $searchedTrack) {
+          $searchedMp3Name = 'TRACKS/'.$searchedTrack['title'];
+          echo '<audio id="title" src="'. $searchedMp3Name .'"></audio>';
+        }
+      } 
+    ?>
+
+    <!-- SEARCH MIX AUDIO END -->
+
+
+    
+  </section>
+
+    <!-- SEARCH SECTION END -->
+
+
+
       <!-- RANDOM MIX START -->
 
-      <section class="container-fluid my-4">
+      <section id="randommix" class="container-fluid my-4">
         <h3>Random mix</h3>
       </div>
       
@@ -189,10 +322,7 @@ include_once("PHP/header.php");
       <!-- RANDOM MIX END -->
 
     </section>
-
-    <!-- MAIN SECTION END -->
-
-
+  
     <!-- ////////////////////////////////////////////////////////////////////////// -->
     
     
@@ -490,8 +620,8 @@ include_once("PHP/header.php");
 
 <!-- COUNTRY SECTION START -->
 
-<section id="country" class="genre" class="mt-5 pt-5 mb-4">
-<div class="container-fluid mt-5 pt-5 mb-5">
+<section id="country" class="genre" class="my-5 py-5">
+<div class="container-fluid my-5 py-5">
     <h3>Country</h3>
   </div>
   
@@ -578,7 +708,10 @@ include_once("PHP/header.php");
 
 
 </section>
-
+<br>
+<br>
+<br>
+<br>
 
 <!-- COUNTRY SECTION END -->
 
@@ -649,19 +782,39 @@ include_once("PHP/header.php");
       <p class="text-success">Track added to favorites</p>
     </div>
 
-    <div id="totop"></div>
+    <img id="totop" src="ICON/up.png" alt="" heigth="35" width="35">
+
 
     <footer>
-
-
+      <div class="container-fluid mt-5">
+        <hr class="mt-5 pt-5">
+        <div class="row d-flex justify-content-center align-items-center text-center">
+          <h4>Gueram & Remy creation ©</h4> <br> <p>2023</p>
+        </div>
+      </div>
     </footer>
 
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-    <script src="JS/lightmode.js"></script>
-    <script src="JS/searchbar.js"></script>
-    <script src="JS/play.js"></script>
-    <script src="JS/like.js"></script>
-    <script src="JS/scroll.js"></script>
+      <script src="JS/lightmode.js"></script>
+      <script src="JS/searchbar.js"></script>
+      <script src="JS/play.js"></script>
+      <script src="JS/like.js"></script>
+      <script src="JS/scroll.js"></script>
+
+    <script>
+
+    const searchSection = document.getElementById("search");
+    const noResult = document.getElementById("noresult");
+    const searchedTracks = <?php echo json_encode($searchedTracks); ?>;
+
+    if(searchedTracks.length > 0) {
+    searchSection.style.display = "block";
+    } else {
+      noResult.style.display = "block";
+    }
+
+</script>
+
   </body>
 </html>
