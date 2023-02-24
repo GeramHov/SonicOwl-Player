@@ -69,7 +69,7 @@ include_once("PHP/header.php");
            echo '<img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>';
           } else {
             echo '<a href="login.php">
-                  <i id="usericon" class="gg-profile ms-1 me-5"></i>
+                  <img id="usericon" class="me-5" src="ICON/user (1).png" alt="" height=22 width=22/>
                   </a>';
           }
           ?>

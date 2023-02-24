@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once("PHP/user_login.php");
+require_once("PHP/tracks_prepare.php");
 include_once("PHP/header.php");
+
 ?>
   <body>
     <!-- NAVBAR START -->
@@ -68,8 +70,8 @@ include_once("PHP/header.php");
           if(isset($_SESSION['user'])){
            echo '<img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>';
           } else {
-            echo '<a href="login.php">
-                  <i id="usericon" class="gg-profile ms-1 me-5"></i>
+            echo '<a class="me-5" href="login.php">
+                  <img id="usericon" class="me-5" src="ICON/user (1).png" alt="" height=22 width=22/>
                   </a>';
           }
           ?>
@@ -89,131 +91,500 @@ include_once("PHP/header.php");
     </nav>
     <!-- NAVBAR END -->
     <!-- SECTION MAIN START -->
-    <section id="main">
+    <div id="main" class="mb-5">
       <div class="container d-flex my-5">
         
-        <button type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Rap 'n R&B</span></button>
-        <button type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Hip & Hop</span></button>
-        <button type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>80's & 90's</span> </button>
-        <button type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Country</span> </button>
+        <button id="rapsection" type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Rap 'n R&B</span></button>
+        <button id="hiphopsection" type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Hip & Hop</span></button>
+        <button id="oldschoolsection" type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>80's & 90's</span> </button>
+        <button id="countrysection" type="button" class="btn btn-primary-outline text-white mx-2 my-5"> <span>Country</span> </button>
 
       </div>
 
       <!-- RANDOM MIX START -->
 
-      <div class="container-fluid my-5 ps-5">
+      <section class="container-fluid my-4">
         <h3>Random mix</h3>
       </div>
       
-      <div class="container-fluid d-flex my-2">
+      <div class="container-fluid d-flex my-4 pt-4">
 
-        <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-          <p class="p-0 m-0">Album : All Eyez On Me</p>
-        </div>
-
-        <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-          <p class="p-0 m-0">Album : Greatest Hits</p>
-        </div>
-
-        <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-          <p class="p-0 m-0">Album : Loyal To The Game</p>
-        </div>
-
-        <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-          <p class="p-0 m-0">Album : Me Against The World</p>
-        </div>
-
-        <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-          <p class="p-0 m-0">Album : Strictly 4 My N.I.G.G.A.Z</p>
-        </div>
-        
-        <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-          <p class="p-0 m-0">Album : The Eminem Show</p>
-        </div>
+      <?php
+        foreach ($randomTracks as $randomTrack) {
+          echo '
+          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
+            <p class="p-0 m-0">Album : '.$randomTrack['album'].'</p>
+          </div>
+          ';
+        }
+      ?>
 
       </div>
 
       <div class="container-fluid d-flex my-4">
-        <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
-          <img src="TEST/alleyezonme.jpeg" alt="">
+
+      <?php
+        foreach ($randomTracks as $randomTrack) {
+          $albumImg = 'COVER/'. $randomTrack['album_cover'];
+          echo '
+          <form action="index.php" method="get">
+          <input type="text" name="name" value="yes" hidden>
+            <button id="likebutton" type="submit">
+                <img src="ICON/fvbtn.png" alt="" width="24" height="22">
+            </button>
+          </form>
+          <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
+          <img src="'. $albumImg .'" alt="">
           <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
           <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
-        </div>
-        <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
-          <img src="TEST/greatesthits.jpg" alt="">
-          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
-          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
-        </div>
-        <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
-          <img src="TEST/loyaltothegame.jpg" alt="">
-          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
-          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
-        </div>
-        <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
-          <img src="TEST/megainsttheworld.jpg" alt="">
-          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
-          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
-        </div>
-        <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
-          <img src="TEST/strictly4myniggaz.jpeg" alt="">
-          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
-          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
-        </div>
-        <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
-          <img src="https://media.auchan.fr/MEDIASTEP182809734_2048x2048/B2CD/" alt="">
-          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
-          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
-        </div>
+          </div>
+          ';
+        }
+      ?>
+
       </div>
 
       <div class="container-fluid d-flex my-2">
-        <div id="tracktitle" class="d-flex justify-content-center mx-3">
-          <h3>All Eyez On Me</h3>
+
+      <?php
+        foreach ($randomTracks as $randomTrack) {
+          $pureTrackname = substr($randomTrack['title'], 0, -4);
+          echo '
+          <div id="tracktitle" class="d-flex justify-content-center mx-3">
+          <h4>'. $pureTrackname .'</h4>
         </div>
-        <div id="tracktitle" class="d-flex justify-content-center mx-3">
-          <h3>Hit'em Up</h3>
-        </div>
-        <div id="tracktitle" class="d-flex justify-content-center mx-3">
-          <h3>Hennessy</h3>
-        </div>
-        <div id="tracktitle" class="d-flex justify-content-center mx-3">
-          <h3>Lord Knows</h3>
-        </div>
-        <div id="tracktitle" class="d-flex justify-content-center mx-3">
-          <h3>Papa'z song</h3>
-        </div>
-        <div id="tracktitle" class="d-flex justify-content-center mx-3">
-          <h3>Without Me</h3>
-        </div>
+          ';
+        }
+      ?>
+
       </div>
+
+
       <div class="container-fluid d-flex my-2">
-        <div id="tracksinger" class="d-flex justify-content-center mx-3">
-          <h4>2Pac</h4>
-        </div>
-        <div id="tracksinger" class="d-flex justify-content-center mx-3">
-          <h4>2Pac</h4>
-        </div>
-        <div id="tracksinger" class="d-flex justify-content-center mx-3">
-          <h4>2Pac</h4>
-        </div>
-        <div id="tracksinger" class="d-flex justify-content-center mx-3">
-          <h4>2Pac</h4>
-        </div>
-        <div id="tracksinger" class="d-flex justify-content-center mx-3">
-          <h4>2Pac</h4>
-        </div>
-        <div id="tracksinger" class="d-flex justify-content-center mx-3">
-          <h4>Eminem</h4>
-        </div>
+
+      <?php
+        foreach ($randomTracks as $randomTrack) {
+          echo '
+          <div id="tracksinger" class="d-flex justify-content-center mx-3">
+            <h5>' . $randomTrack['author'] . '</h5>
+          </div>
+          ';
+        }
+      ?>
+
       </div>
+
+    <!-- RANDOM MIX AUDIO START -->
+
+      <?php
+      foreach ($randomTracks as $randomTrack) {
+        $randomMp3Name = 'TRACKS/'.$randomTrack['title'];
+        echo '<audio id="title" src="'. $randomMp3Name .'"></audio>';
+      }
+    ?>
+
+    <!-- RANDOM MIX AUDIO END -->
+
 
       <!-- RANDOM MIX END -->
 
     </section>
 
-    <!-- SECTION MAIN END -->
+    <!-- MAIN SECTION END -->
 
-    <!-- PLAYER START -->
+
+    <!-- ////////////////////////////////////////////////////////////////////////// -->
+    
+    
+    <!-- RAP SECTION START -->
+
+    <section id="rap" class="genre" class="mt-5 pt-5 mb-4">
+    <div class="container-fluid mt-5 pt-5 mb-5">
+        <h3>Rap 'n R&B</h3>
+      </div>
+      
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($rapTracks as $rapTrack) {
+          echo '
+          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
+            <p class="p-0 m-0">Album : '.$rapTrack['album'].'</p>
+          </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-4">
+
+      <?php
+        foreach ($rapTracks as $rapTrack) {
+          $rapAlbumImg = 'COVER/'. $rapTrack['album_cover'];
+          echo '
+          <form action="index.php" method="get">
+          <input type="text" name="name" value="yes" hidden>
+            <button id="likebutton" type="submit">
+                <img src="ICON/fvbtn.png" alt="" width="24" height="22">
+            </button>
+          </form>
+          <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
+          <img src="'. $rapAlbumImg .'" alt="">
+          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
+          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
+        </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($rapTracks as $rapTrack) {
+          $pureRapTrackname = substr($rapTrack['title'], 0, -4);
+          echo '
+          <div id="tracktitle" class="d-flex justify-content-center mx-3">
+          <h4>'. $pureRapTrackname .'</h4>
+        </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($rapTracks as $rapTrack) {
+          echo '
+          <div id="tracksinger" class="d-flex justify-content-center mx-3">
+            <h5>' . $rapTrack['author'] . '</h5>
+          </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+    <!-- RAP MIX AUDIO START -->
+
+      <?php
+
+        foreach ($rapTracks as $rapTrack) {
+        $rapMp3Name = 'TRACKS/'.$rapTrack['title'];
+        echo '<audio id="title" src="'. $rapMp3Name .'"></audio>';
+        }
+      
+      ?>
+
+    <!-- RAP MIX AUDIO START -->
+
+
+
+    </section>
+
+    <!-- RAP SECTION END -->
+
+
+    <!-- ////////////////////////////////////////////////////////////////////////// -->
+
+
+    <!-- HIP & HOP SECTION START -->
+
+    <section id="hiphop" class="genre" class="mt-5 pt-5 mb-4">
+    <div class="container-fluid mt-5 pt-5 mb-5">
+        <h3>Hip & Hop</h3>
+      </div>
+      
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($hiphopTracks as $hiphopTrack) {
+          echo '
+          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
+            <p class="p-0 m-0">Album : '.$hiphopTrack['album'].'</p>
+          </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-4">
+
+      <?php
+        foreach ($hiphopTracks as $hiphopTrack) {
+          $hiphopAlbumImg = 'COVER/'. $hiphopTrack['album_cover'];
+          echo '
+          <form action="index.php" method="get">
+          <input type="text" name="name" value="yes" hidden>
+            <button id="likebutton" type="submit">
+                <img src="ICON/fvbtn.png" alt="" width="24" height="22">
+            </button>
+          </form>
+          <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
+          <img src="'. $hiphopAlbumImg .'" alt="">
+          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
+          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
+        </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($hiphopTracks as $hiphopTrack) {
+          $pureHiphopTrackname = substr($hiphopTrack['title'], 0, -4);
+          echo '
+          <div id="tracktitle" class="d-flex justify-content-center mx-3">
+          <h4>'. $pureHiphopTrackname .'</h4>
+        </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($hiphopTracks as $hiphopTrack) {
+          echo '
+          <div id="tracksinger" class="d-flex justify-content-center mx-3">
+            <h5>' . $hiphopTrack['author'] . '</h5>
+          </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+    <!-- HIP&HOP MIX AUDIO START -->
+
+    <?php
+
+      foreach ($hiphopTracks as $hiphopTrack) {
+      $hiphopMp3Name = 'TRACKS/'.$hiphopTrack['title'];
+      echo '<audio id="title" src="'. $hiphopMp3Name .'"></audio>';
+      }
+
+    ?>
+
+    <!-- HIP&HOP MIX AUDIO END -->
+
+
+
+    </section>
+
+    <!-- HIP & HOP SECTION END -->
+
+    <!-- ///////////////////////////////////////////////////////////// -->
+    
+    <!-- 80's & 90's SECTION START -->
+
+    <section id="oldschool" class="genre" class="mt-5 pt-5 mb-4">
+    <div class="container-fluid mt-5 pt-5 mb-5">
+        <h3>80's & 90's</h3>
+      </div>
+      
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($oldschoolTracks as $oldschoolTrack) {
+          echo '
+          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
+            <p class="p-0 m-0">Album : '.$oldschoolTrack['album'].'</p>
+          </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-4">
+
+      <?php
+        foreach ($oldschoolTracks as $oldschoolTrack) {
+          $oldschoolAlbumImg = 'COVER/'. $oldschoolTrack['album_cover'];
+          echo '
+          <form action="index.php" method="get">
+          <input type="text" name="name" value="yes" hidden>
+            <button id="likebutton" type="submit">
+                <img src="ICON/fvbtn.png" alt="" width="24" height="22">
+            </button>
+          </form>
+          <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
+          <img src="'. $oldschoolAlbumImg .'" alt="">
+          <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
+          <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
+        </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($oldschoolTracks as $oldschoolTrack) {
+          $pureOldschoolTrackname = substr($oldschoolTrack['title'], 0, -4);
+          echo '
+          <div id="tracktitle" class="d-flex justify-content-center mx-3">
+          <h4>'. $pureOldschoolTrackname .'</h4>
+        </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+
+      <div class="container-fluid d-flex my-2">
+
+      <?php
+        foreach ($oldschoolTracks as $oldschoolTrack) {
+          echo '
+          <div id="tracksinger" class="d-flex justify-content-center mx-3">
+            <h5>' . $oldschoolTrack['author'] . '</h5>
+          </div>
+          ';
+        }
+      ?>
+
+      </div>
+
+    <!-- 80's & 90's MIX AUDIO START -->
+
+    <?php
+
+      foreach ($oldschoolTracks as $oldschoolTrack) {
+      $oldschoolMp3Name = 'TRACKS/'.$oldschoolTrack['title'];
+      echo '<audio id="title" src="'. $oldschoolMp3Name .'"></audio>';
+      }
+
+    ?>
+
+    <!-- 80's & 90's MIX AUDIO END -->
+
+
+
+    </section>
+
+
+    <!-- 80's & 90's SECTION END -->
+
+    </section>
+
+<!-- HIP & HOP SECTION END -->
+
+<!-- ///////////////////////////////////////////////////////////// -->
+
+<!-- COUNTRY SECTION START -->
+
+<section id="country" class="genre" class="mt-5 pt-5 mb-4">
+<div class="container-fluid mt-5 pt-5 mb-5">
+    <h3>Country</h3>
+  </div>
+  
+  <div class="container-fluid d-flex my-2">
+
+  <?php
+    foreach ($countryTracks as $countryTrack) {
+      echo '
+      <div id="titleofalbum" class="d-flex justify-content-center mx-3">
+        <p class="p-0 m-0">Album : '.$countryTrack['album'].'</p>
+      </div>
+      ';
+    }
+  ?>
+
+  </div>
+
+  <div class="container-fluid d-flex my-4">
+
+  <?php
+    foreach ($countryTracks as $countryTrack) {
+      $countryAlbumImg = 'COVER/'. $countryTrack['album_cover'];
+      echo '
+      <form action="index.php" method="get">
+          <input type="text" name="name" value="yes" hidden>
+            <button id="likebutton" type="submit">
+                <img src="ICON/fvbtn.png" alt="" width="24" height="22">
+            </button>
+          </form>
+      <div id="albumcard" class="card rounded-0 mx-3 d-flex align-items-center justify-content-center">
+      <img src="'. $countryAlbumImg .'" alt="">
+      <img id="albumplaybtn" class="playbutton" src="ICON/play-48.png" alt="">
+      <img id="albumpausebtn" class="pausebutton" src="ICON/pause-48.png" alt="">
+    </div>
+      ';
+    }
+  ?>
+
+  </div>
+
+  <div class="container-fluid d-flex my-2">
+
+  <?php
+    foreach ($countryTracks as $countryTrack) {
+      $pureCountryTrackname = substr($countryTrack['title'], 0, -4);
+      echo '
+      <div id="tracktitle" class="d-flex justify-content-center mx-3">
+      <h4>'. $pureCountryTrackname .'</h4>
+    </div>
+      ';
+    }
+  ?>
+
+  </div>
+
+
+  <div class="container-fluid d-flex my-2">
+
+  <?php
+    foreach ($countryTracks as $countryTrack) {
+      echo '
+      <div id="tracksinger" class="d-flex justify-content-center mx-3">
+        <h5>' . $countryTrack['author'] . '</h5>
+      </div>
+      ';
+    }
+  ?>
+
+  </div>
+
+<!-- COUNTRY MIX AUDIO START -->
+
+<?php
+
+  foreach ($countryTracks as $countryTrack) {
+  $countryMp3Name = 'TRACKS/'.$countryTrack['title'];
+  echo '<audio id="title" src="'. $countryMp3Name .'"></audio>';
+  }
+
+?>
+
+<!-- COUNTRY MIX AUDIO END -->
+
+
+
+</section>
+
+
+<!-- COUNTRY SECTION END -->
+
+   
+
+<!-- PLAYER START -->
 
 
     <div id="music-player" class="container-fluid">
@@ -272,22 +643,25 @@ include_once("PHP/header.php");
 
     <!-- PLAYER END -->
 
-    <!-- AUDI TAGS START -->
+    <!-- LIKE SUCCESS -->
 
-    <audio id="title1" src="TEST/alleyezonme.mp3"></audio>
-    <audio id="title2" src="TEST/hitemup.mp3"></audio>
-    <audio id="title3" src="TEST/hennessy.mp3"></audio>
-    <audio id="title4" src="TEST/lordknows.mp3"></audio>
-    <audio id="title5" src="TEST/papazsong.mp3"></audio>
-    <audio id="title6" src="TEST/withoutme.mp3"></audio>
+    <div id="likesuccess" class="d-flex justify-content-center align-items-center text-center pt-3">
+      <p class="text-success">Track added to favorites</p>
+    </div>
 
-    <!-- AUDI TAGS END -->
+    <div id="totop"></div>
 
+    <footer>
+
+
+    </footer>
 
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     <script src="JS/lightmode.js"></script>
     <script src="JS/searchbar.js"></script>
     <script src="JS/play.js"></script>
+    <script src="JS/like.js"></script>
+    <script src="JS/scroll.js"></script>
   </body>
 </html>
