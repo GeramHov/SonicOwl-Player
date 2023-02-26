@@ -2,7 +2,7 @@
 session_start();
 require_once("PHP/config.php");
 require_once("PHP/user_signup.php");
-include_once("PHP/header.php");
+require_once("PHP/headpage.php");
 ?>
   <body>
     <nav class="navbar">
@@ -66,7 +66,9 @@ include_once("PHP/header.php");
           </div>
           <?php
           if(isset($_SESSION['user'])){
-           echo '<img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>';
+           echo '<a href="userprofile.php" >
+                  <img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>
+                </a>';
           } else {
             echo '<a href="login.php">
                   <img id="usericon" class="me-5" src="ICON/user (1).png" alt="" height=22 width=22/>

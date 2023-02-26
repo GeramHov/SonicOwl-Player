@@ -21,6 +21,12 @@
   margin-left: 1.5vw;
 }
 
+#trashbtn{
+  background: transparent !important;
+  border: none;
+  color: white;
+}
+
 #likesuccess{
   width: 200px;
   height: 38px;
@@ -135,6 +141,14 @@ footer{
 }
 
 #noresult{
+  display: none;
+}
+
+#librarysearch{
+  display: none;
+}
+
+#usersearch{
   display: none;
 }
 
@@ -284,21 +298,21 @@ nav.navbar {
 
 #albumplaybtn {
   position: absolute;
-  width: 48px !important;
-  height: 48px !important;
+  width: 36px !important;
+  height: 36px !important;
 }
 
 #albumpausebtn {
   position: absolute;
-  width: 48px !important;
-  height: 48px !important;
+  width: 36px !important;
+  height: 36px !important;
   display: none;
 }
 
 #albumpausebtn:hover {
   position: absolute;
-  width: 48px !important;
-  height: 48px !important;
+  width: 36px !important;
+  height: 36px !important;
   transform: scale(1.3);
   transition: 0.2s ease-in;
   cursor: pointer;
@@ -306,8 +320,8 @@ nav.navbar {
 
 #albumpausebtn:not(:hover) {
   position: absolute;
-  width: 48px !important;
-  height: 48px !important;
+  width: 36px !important;
+  height: 36px !important;
   transform: scale(1);
   transition: 0.2s ease-out;
   cursor: pointer;
@@ -315,8 +329,8 @@ nav.navbar {
 
 #albumplaybtn:hover {
   position: absolute;
-  width: 48px !important;
-  height: 48px !important;
+  width: 36px !important;
+  height: 36px !important;
   transform: scale(1.3);
   transition: 0.2s ease-in;
   cursor: pointer;
@@ -324,8 +338,8 @@ nav.navbar {
 
 #albumplaybtn:not(:hover) {
   position: absolute;
-  width: 48px !important;
-  height: 48px !important;
+  width: 36px !important;
+  height: 36px !important;
   transform: scale(1);
   transition: 0.2s ease-out;
   cursor: pointer;
@@ -416,6 +430,18 @@ body.alternate #searchbuttonicon::after {
   filter: brightness(0) invert(0) !important;
 }
 
+body.alternate #trashbtn{
+  background: transparent !important;
+  border: none;
+  color: #332d2d;
+}
+
+body.alternate #trashbtn::after{
+  background: transparent !important;
+  border: none;
+  color: #332d2d;
+}
+
 
 .btn-primary-outline {
   background-color: transparent;
@@ -481,7 +507,7 @@ body.alternate #albumcard::after {
   h3,
   h4 {
     font-family: "Roboto", sans-serif;
-    font-size: small;
+    font-size: smaller;
   }
   #searchbox {
     display: none;
@@ -614,6 +640,10 @@ body.alternate #albumcard::after {
 
   #searchbutton {
     padding: 0 !important;
+  }
+
+  #titleofalbum{
+    display: none;
   }
 }
 

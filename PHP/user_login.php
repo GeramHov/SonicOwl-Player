@@ -29,6 +29,9 @@
     if (isset($_SESSION['user'])) {
         $userName = $_SESSION['user']['username'];
         $userPhoto = $_SESSION['user']['image'];
+        $userId = $_SESSION['user']['id'];
         $imageURL = 'USER_IMAGES/' . $_SESSION['user']['image'];
+      } else {
+        $userId = "";
       }
 ?>

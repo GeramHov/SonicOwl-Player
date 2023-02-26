@@ -2,8 +2,7 @@
 session_start();
 require_once("PHP/user_login.php");
 require_once("PHP/tracks_prepare.php");
-include_once("PHP/header.php");
-
+require_once("PHP/headpage.php");
 ?>
 
 <?php
@@ -23,6 +22,19 @@ if(isset($_GET['keyword'])) {
 }
 
 global $searchedTracks;
+
+if (isset($userId)) {
+  // Prepare the SQL statement for insertion
+  $sql = "INSERT INTO playlist (user_id, track_id) VALUES (:userId, :trackId)";
+  $statement = $dataBase->prepare($sql);
+
+  // Bind the values to the prepared statement
+  if(isset($_GET['userid']) && isset($_GET['trackid']) && $userId) {
+    $statement->bindParam(':userId', $_GET['userid']);
+    $statement->bindParam(':trackId', $_GET['trackid']);
+    $statement->execute();
+  }
+};
 
 ?>
 
@@ -96,7 +108,10 @@ global $searchedTracks;
           </div>
           <?php
           if(isset($_SESSION['user'])){
-           echo '<img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>';
+           echo ' <a href="userprofile.php" >
+                  <img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>
+                  </a>
+                  ';
           } else {
             echo '<a class="me-5" href="login.php">
                   <img id="usericon" class="me-5" src="ICON/user (1).png" alt="" height=22 width=22/>
@@ -137,22 +152,6 @@ global $searchedTracks;
     <section id="search" class="container-fluid my-4">
         <h3>Search results...</h3>
       </div>
-      
-      <div class="container-fluid d-flex m-0 p-0">
-
-      <?php
-      if($searchedTracks){
-        foreach ($searchedTracks as $searchedTrack) {
-          echo '
-          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-            <p class="p-0 m-0">Album : '.$searchedTrack['album'].'</p>
-          </div>
-          ';
-        }
-      }
-      ?>
-
-      </div>
 
       <div class="container-fluid d-flex my-4">
 
@@ -162,7 +161,8 @@ global $searchedTracks;
           $searchedAlbumImg = 'COVER/'. $searchedTrack['album_cover'];
           echo '
           <form action="index.php" method="get">
-          <input type="text" name="name" value="yes" hidden>
+          <input type="text" name="userid" value="'.$userId.'" hidden>
+          <input type="text" name="trackid" value="'.$searchedTrack['id'].'" hidden>
             <button id="likebutton" type="submit">
                 <img src="ICON/fvbtn.png" alt="" width="24" height="22">
             </button>
@@ -236,32 +236,19 @@ global $searchedTracks;
 
       <!-- RANDOM MIX START -->
 
-      <section id="randommix" class="container-fluid my-4">
-        <h3>Random mix</h3>
-      </div>
-      
-      <div class="container-fluid d-flex my-4 pt-4">
-
-      <?php
-        foreach ($randomTracks as $randomTrack) {
-          echo '
-          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-            <p class="p-0 m-0">Album : '.$randomTrack['album'].'</p>
-          </div>
-          ';
-        }
-      ?>
-
+      <section id="randommix" class="container-fluid py-4 my-4">
+        <h3 class="mb-4">Random mix</h3>
       </div>
 
-      <div class="container-fluid d-flex my-4">
+      <div class="container-fluid d-flex py-4 my-4">
 
       <?php
         foreach ($randomTracks as $randomTrack) {
           $albumImg = 'COVER/'. $randomTrack['album_cover'];
           echo '
           <form action="index.php" method="get">
-          <input type="text" name="name" value="yes" hidden>
+          <input type="text" name="userid" value="'. $userId .'" hidden>
+          <input type="text" name="trackid" value="'. $randomTrack['id'] .'" hidden>
             <button id="likebutton" type="submit">
                 <img src="ICON/fvbtn.png" alt="" width="24" height="22">
             </button>
@@ -332,20 +319,6 @@ global $searchedTracks;
     <div class="container-fluid mt-5 pt-5 mb-5">
         <h3>Rap 'n R&B</h3>
       </div>
-      
-      <div class="container-fluid d-flex my-2">
-
-      <?php
-        foreach ($rapTracks as $rapTrack) {
-          echo '
-          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-            <p class="p-0 m-0">Album : '.$rapTrack['album'].'</p>
-          </div>
-          ';
-        }
-      ?>
-
-      </div>
 
       <div class="container-fluid d-flex my-4">
 
@@ -354,7 +327,8 @@ global $searchedTracks;
           $rapAlbumImg = 'COVER/'. $rapTrack['album_cover'];
           echo '
           <form action="index.php" method="get">
-          <input type="text" name="name" value="yes" hidden>
+          <input type="text" name="userid" value="'. $userId .'" hidden>
+          <input type="text" name="trackid" value="'. $rapTrack['id'] .'" hidden>
             <button id="likebutton" type="submit">
                 <img src="ICON/fvbtn.png" alt="" width="24" height="22">
             </button>
@@ -429,20 +403,6 @@ global $searchedTracks;
     <div class="container-fluid mt-5 pt-5 mb-5">
         <h3>Hip & Hop</h3>
       </div>
-      
-      <div class="container-fluid d-flex my-2">
-
-      <?php
-        foreach ($hiphopTracks as $hiphopTrack) {
-          echo '
-          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-            <p class="p-0 m-0">Album : '.$hiphopTrack['album'].'</p>
-          </div>
-          ';
-        }
-      ?>
-
-      </div>
 
       <div class="container-fluid d-flex my-4">
 
@@ -451,7 +411,8 @@ global $searchedTracks;
           $hiphopAlbumImg = 'COVER/'. $hiphopTrack['album_cover'];
           echo '
           <form action="index.php" method="get">
-          <input type="text" name="name" value="yes" hidden>
+          <input type="text" name="userid" value="'. $userId .'" hidden>
+          <input type="text" name="trackid" value="'. $hiphopTrack['id'] .'" hidden>
             <button id="likebutton" type="submit">
                 <img src="ICON/fvbtn.png" alt="" width="24" height="22">
             </button>
@@ -524,20 +485,6 @@ global $searchedTracks;
     <div class="container-fluid mt-5 pt-5 mb-5">
         <h3>80's & 90's</h3>
       </div>
-      
-      <div class="container-fluid d-flex my-2">
-
-      <?php
-        foreach ($oldschoolTracks as $oldschoolTrack) {
-          echo '
-          <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-            <p class="p-0 m-0">Album : '.$oldschoolTrack['album'].'</p>
-          </div>
-          ';
-        }
-      ?>
-
-      </div>
 
       <div class="container-fluid d-flex my-4">
 
@@ -546,7 +493,8 @@ global $searchedTracks;
           $oldschoolAlbumImg = 'COVER/'. $oldschoolTrack['album_cover'];
           echo '
           <form action="index.php" method="get">
-          <input type="text" name="name" value="yes" hidden>
+          <input type="text" name="userid" value="'. $userId .'" hidden>
+          <input type="text" name="trackid" value="'. $oldschoolTrack['id'] .'" hidden>
             <button id="likebutton" type="submit">
                 <img src="ICON/fvbtn.png" alt="" width="24" height="22">
             </button>
@@ -624,20 +572,6 @@ global $searchedTracks;
 <div class="container-fluid my-5 py-5">
     <h3>Country</h3>
   </div>
-  
-  <div class="container-fluid d-flex my-2">
-
-  <?php
-    foreach ($countryTracks as $countryTrack) {
-      echo '
-      <div id="titleofalbum" class="d-flex justify-content-center mx-3">
-        <p class="p-0 m-0">Album : '.$countryTrack['album'].'</p>
-      </div>
-      ';
-    }
-  ?>
-
-  </div>
 
   <div class="container-fluid d-flex my-4">
 
@@ -646,7 +580,8 @@ global $searchedTracks;
       $countryAlbumImg = 'COVER/'. $countryTrack['album_cover'];
       echo '
       <form action="index.php" method="get">
-          <input type="text" name="name" value="yes" hidden>
+      <input type="text" name="userid" value="'. $userId .'" hidden>
+      <input type="text" name="trackid" value="'. $countryTrack['id'] .'" hidden>
             <button id="likebutton" type="submit">
                 <img src="ICON/fvbtn.png" alt="" width="24" height="22">
             </button>
@@ -723,16 +658,13 @@ global $searchedTracks;
     <div id="music-player" class="container-fluid">
       <div class="row">
         <div class="col d-flex justify-content-center align-items-center">
-          <div id="progress-bar">
-            <!-- <input
-              class="bg-light"
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value="1"
-            /> -->
-          </div>
+
+          <div class="timeline">
+            <span class="text-light" id="timeline-min">00:00</span>
+            <input type="range" min="0" max="100" value="0" id="musicbar">
+            <span class="text-light" id="timeline-max">00:00</span>
+        </div>
+        
         </div>
         <div class="col d-flex justify-content-between my-3">
           <img id="repeat" src="ICON\repeat-24.png" alt="repeat" class="mx-3" width="24" height="24" />

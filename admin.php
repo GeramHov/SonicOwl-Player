@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include_once('PHP/header.php');
+    require_once("PHP/headpage.php");
     require_once('PHP/config.php');
     require_once('PHP/tracks_insert.php');
 ?>

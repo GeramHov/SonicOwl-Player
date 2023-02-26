@@ -65,7 +65,4 @@ $req->execute();
 $countryTracks = $req->fetchAll();
 
 $_SESSION['country'] = $countryTracks;
-
-
-
 ?>

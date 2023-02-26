@@ -68,6 +68,21 @@ function playByIndex(index) {
   currentIndex = index;
 }
 
+function updateProgressBar() {
+  const audioTag = audioTags[currentIndex];
+  const musicBar = document.getElementById("musicbar");
+  const timelineMax = document.getElementById("timeline-max");
+
+  musicBar.value = (audioTag.currentTime / audioTag.duration) * 100;
+  timelineMax.textContent = formatTime(audioTag.duration);
+}
+
+function formatTime(timeInSeconds) {
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = Math.floor(timeInSeconds % 60);
+  return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+}
+
 playBtns.forEach((playBtn, index) => {
   const audioTag = audioTags[index];
   const pauseBtn = pauseBtns[index];
@@ -99,6 +114,23 @@ mainPause.addEventListener("click", () => {
   const index = Array.from(audioTags).indexOf(audioTag);
   playByIndex(index);
 });
+
+// PROGRESS BAR EVENTS
+
+audioTags.forEach((audioTag, index) => {
+  audioTag.addEventListener("timeupdate", () => {
+    updateProgressBar();
+  });
+});
+
+const musicBar = document.getElementById("musicbar");
+musicBar.addEventListener("input", () => {
+  const audioTag = audioTags[currentIndex];
+  audioTag.currentTime = (musicBar.value / 100) * audioTag.duration;
+});
+
+updateProgressBar();
+
 
 // SHUFFLE AND REPEAT ACTIONS
 
@@ -160,26 +192,3 @@ audioTags.forEach((audioTag) => {
   });
 });
 
-// PROGRESS BAR
-
-// audioTags.forEach((tag) => {
-//   tag.addEventListener("timeupdate", () => {
-//     updateProgressBar(tag);
-//   });
-// });
-
-// function updateProgressBar(audioTag) {
-//   const progressBar = document.querySelector("#progress-bar input");
-//   const progress = (audioTag.currentTime / audioTag.duration) * 100;
-//   progressBar.style.width = `${progress}%`;
-// }
-
-// const progressBar = document.querySelector("#progress-bar input");
-
-// progressBar.addEventListener("click", (e) => {
-//   const posX = e.clientX - progressBar.getBoundingClientRect().left;
-//   const width = progressBar.offsetWidth;
-//   const duration = audioTags[currentIndex].duration;
-//   const seekTime = (posX / width) * duration;
-//   audioTags[currentIndex].currentTime = seekTime;
-// });

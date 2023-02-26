@@ -3,7 +3,22 @@ session_start();
 require_once("PHP/config.php");
 require_once("PHP/user_login.php");
 require_once("PHP/tracks_prepare.php");
-include_once("PHP/header.php");
+require_once("PHP/headpage.php");
+
+$requery = $dataBase->prepare("
+    SELECT * FROM tracks 
+    WHERE title LIKE CONCAT('%', :keyword, '%')
+    OR album LIKE CONCAT('%', :keyword, '%')
+    OR author LIKE CONCAT('%', :keyword, '%')
+    LIMIT 6
+");
+
+if(isset($_GET['keyword'])) {
+  $requery->execute(['keyword' => $_GET['keyword']]);
+  $searchedTracks = $requery->fetchAll(PDO::FETCH_ASSOC);
+}
+
+global $searchedTracks;
 
 ?>
   <body>
@@ -20,22 +35,27 @@ include_once("PHP/header.php");
           
         </div>
         <div id="searchinput">
+          <form action="library.php" method="get">
           <div class="input-group rounded" style="width: 50vw">
             <input
               type="search"
+              name="keyword"
               class="form-control rounded"
               placeholder="Title, artist or album name ..."
               aria-label="Search"
               aria-describedby="search-addon"
             />
+            <button id="btnsearch">
             <span
               class="input-group-text bg-dark"
               id="search-addon"
               type="submit"
             >
-              <i class="mb-1 gg-search" style="color: #fbfbfb"></i>
+              <i class="mb-1 gg-search" id="iconsearch" style="color: #fbfbfb"></i>
             </span>
+            </button>
           </div>
+        </form>
         </div>
         <div
           class="col col-lg-9 col-md-8 col-sm-10 text-center d-flex justify-content-center"
@@ -68,7 +88,9 @@ include_once("PHP/header.php");
           </div>
           <?php
           if(isset($_SESSION['user'])){
-           echo '<img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>';
+           echo '<a href="userprofile.php" >
+                  <img id="loggedusericon" class="mx-3" src="' . $imageURL . '" alt="userimage"/>
+                 </a>';
           } else {
             echo '<a href="login.php">
                   <img id="usericon" class="me-5" src="ICON/user (1).png" alt="" height=22 width=22/>
@@ -100,21 +122,65 @@ include_once("PHP/header.php");
           </div>
         </div>
       </div>
-      <div class="container text-start my-4">
-        <h4 class="my-3 py-3">All</h4>
-      </div>
-      <div class="container d-flex">
-        <div class="col col-lg-6 col-md-6 col-sm-8 mb-3">Title</div>
-
-        <div
-          id="album"
-          class="col col-lg-6 col-md-6 col-sm-4 d-flex justify-content-start mx-2"
-        >
-          Album
-        </div>
-      </div>
     </section>
-    <div class="container">
+    <p id="noresult" class="mx-5">No result found.</p>
+    <div id="librarysearch" class="container my-5">
+    <div class="container text-start my-4">
+            <h4 class="my-3 py-3">Search result...</h4>
+            </div>
+            <div class="container d-flex">
+            <div class="col col-lg-6 col-md-6 col-sm-8 mb-3">Title</div>
+    
+            <div
+              id="album"
+              class="col col-lg-6 col-md-6 col-sm-4 d-flex justify-content-start mx-2"
+            >
+              Album
+            </div>
+             </div>
+             <p id="noresult" class="mx-5">No result found.</p>
+      <?php
+        if($searchedTracks){
+          foreach ($searchedTracks as $searchedTrack) {
+            $searchedAlbumCoverName = 'COVER/'. $searchedTrack['album_cover'];
+            echo '
+            <div class="row">
+            <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
+              <i id="playbutton" class="gg-play-button-o playbutton"></i>
+              <i id="pausebutton" class="gg-play-pause-o pausebutton"></i>
+              <h4 class="mx-3">' .substr($searchedTrack['title'],0, -4) . '</h4>
+            </div>
+            <div class="col col-lg-6 col-md-6 col-sm-6 d-flex">
+              <img src="'.$searchedAlbumCoverName.'" alt="album" width="40" height="40" />
+              <h5 class="px-4">'.$searchedTrack['album'].'</h5>
+            </div>
+          </div>
+          <hr>
+            ';
+          }
+          if($searchedTracks) {
+            foreach ($searchedTracks as $searchedTrack) {
+              $searchedMp3Name = 'TRACKS/'.$searchedTrack['title'];
+              echo '<audio id="title" src="'. $searchedMp3Name .'"></audio>';
+            }
+          } 
+        }
+      ?>
+    </div>
+    <div id="libraryall" class="container">
+    <div class="container text-start my-4">
+            <h4 class="my-3 py-3">All</h4>
+            </div>
+            <div class="container d-flex">
+            <div class="col col-lg-6 col-md-6 col-sm-8 mb-3">Title</div>
+    
+            <div
+              id="album"
+              class="col col-lg-6 col-md-6 col-sm-4 d-flex justify-content-start mx-2"
+            >
+              Album
+            </div>
+             </div>
     <?php
       foreach ($tracks as $track) {
         $albumCoverName = 'COVER/'. $track['album_cover'];
@@ -142,16 +208,11 @@ include_once("PHP/header.php");
     <div id="music-player" class="container-fluid">
       <div class="row">
         <div class="col d-flex justify-content-center align-items-center">
-          <div id="progress-bar">
-            <!-- <input
-              class="bg-light"
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value="1"
-            /> -->
-          </div>
+        <div class="timeline">
+            <span class="text-light" id="timeline-min">00:00</span>
+            <input type="range" min="0" max="100" value="0" id="musicbar">
+            <span class="text-light" id="timeline-max">00:00</span>
+        </div>
         </div>
         <div class="col d-flex justify-content-between my-3">
           <img id="repeat" src="ICON\repeat-24.png" alt="repeat" class="mx-3" width="24" height="24" />
@@ -214,6 +275,19 @@ include_once("PHP/header.php");
     <script src="JS/searchbar.js"></script>
     <script src="JS/play.js"></script>
     <script src="JS/lightmode-library.js"></script>
+    <script>
+
+    const searchDiv = document.getElementById("librarysearch");
+    const noResult = document.getElementById("noresult");
+    const searchedTracks = <?php echo json_encode($searchedTracks); ?>;
+
+    if(searchedTracks.length > 0) {
+      searchDiv.style.display = "block";
+    } else {
+      noResult.style.display = "block";
+    }
+
+</script>
   </body>
 </html>
 
