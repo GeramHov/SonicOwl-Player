@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 23, 2023 at 02:19 AM
--- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- Host: mysql
+-- Generation Time: Feb 28, 2023 at 08:07 AM
+-- Server version: 10.6.11-MariaDB-1:10.6.11+maria~ubu2004-log
+-- PHP Version: 8.1.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,17 +24,42 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `playlist`
+--
+
+CREATE TABLE `playlist` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `track_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `playlist`
+--
+
+INSERT INTO `playlist` (`id`, `user_id`, `track_id`) VALUES
+(53, 13, 33),
+(58, 13, 30),
+(60, 15, 20),
+(62, 13, 31),
+(63, 13, 26),
+(64, 13, 17),
+(66, 13, 30);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tracks`
 --
 
 CREATE TABLE `tracks` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `author` varchar(255) NOT NULL,
   `album` varchar(255) NOT NULL,
   `genre` varchar(255) NOT NULL,
   `album_cover` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tracks`
@@ -73,16 +98,32 @@ INSERT INTO `tracks` (`id`, `title`, `author`, `album`, `genre`, `album_cover`) 
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `image`) VALUES
+(13, 'gueram', 'geram.hov@gmail.com', '123', '63f7261904e278.78452638.jpeg'),
+(14, 'babayaga', 'baba@yaga.com', '123', '63fb8c1bc886f9.17284341.jpeg'),
+(16, 'alexendre', 'alex@gmail.com', '123', '63fca2b7c205a1.22015181.jpg'),
+(17, 'remy', 'remdev@remdev.com', '123', '63fca3ba3aa4d8.16578698.jpg');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `playlist`
+--
+ALTER TABLE `playlist`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tracks`
@@ -101,16 +142,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `playlist`
+--
+ALTER TABLE `playlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
+--
 -- AUTO_INCREMENT for table `tracks`
 --
 ALTER TABLE `tracks`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
