@@ -721,18 +721,18 @@ if (isset($userId)) {
       <div class="container-fluid mt-5">
         <hr class="mt-5 pt-5">
         <div class="row d-flex justify-content-center align-items-center text-center">
-          <h4>Gueram & Remy creation ©</h4> <br> <p>2023</p>
+          <h4>Gueram Hovhannisyan ©</h4> <br> <p>2023</p>
         </div>
       </div>
     </footer>
 
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-      <script src="JS/lightmode.js"></script>
-      <script src="JS/searchbar.js"></script>
-      <script src="JS/play.js"></script>
-      <script src="JS/like.js"></script>
-      <script src="JS/scroll.js"></script>
+      <script src="./JS/lightmode.js"></script>
+      <script src="./JS/searchbar.js"></script>
+      <script src="./JS/play.js"></script>
+      <script src="./JS/like.js"></script>
+      <script src="./JS/scroll.js"></script>
 
     <script>
 

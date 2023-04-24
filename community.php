@@ -27,7 +27,7 @@ global $searchedUsers;
     <nav class="navbar">
       <div class="container-fluid d-flex">
         <div id="homelogo" class="col col-lg-1 col-md-1 ps-2">
-          <a href="index.html"><img
+          <a href="./index.php"><img
             id="logo"
             src="LOGO/FullLogo_Transparent_NoBuffer.png"
             alt="logo"
@@ -62,10 +62,10 @@ global $searchedUsers;
         <div
           class="col col-lg-9 col-md-8 col-sm-10 text-center d-flex justify-content-center"
         >
-          <a id="home" class="px-4" href="index.php">
+          <a id="home" class="px-4" href="./index.php">
             <h5 id="homebutton">Home</h5>
           </a>
-          <a id="library" class="px-4" href="library.php">
+          <a id="library" class="px-4" href="./library.php">
             <h5>Library</h5>
           </a>
           <a id="community" class="px-4" href="community.php">
